@@ -69,10 +69,6 @@ select{
   margin:5px;
   border:none;
   float:left;
-/*   position:relative;
-  top:150px;
-  left:15px; */
-
 }
 .btn-answer:focus{
   outline:none;
@@ -85,9 +81,16 @@ select{
 .question{
   padding-top: 10px;
 }
-.highlight{
-  
-}
 #score{
   text-align: center;
 }
+#reset-btn{
+  margin: 0 auto;
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+  
