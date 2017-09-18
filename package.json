@@ -1,0 +1,23 @@
+{
+  "name": "quiz-tdb",
+  "version": "1.0.0",
+  "description": "A quiz game created with the open trivia database api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack src/js/quiz.js dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasanbanna/quiz-game-tdb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hasanbanna/quiz-game-tdb/issues"
+  },
+  "homepage": "https://github.com/hasanbanna/quiz-game-tdb#readme",
+  "devDependencies": {
+    "webpack": "3.6.0"
+  }
+}
