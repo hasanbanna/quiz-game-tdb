@@ -1,5 +1,5 @@
 import { PlayController } from '../controllers/PlayController.js'
-import { MainController } from '../controllers/MainController.js'
+import { MainMenuController } from '../controllers/MainMenuController.js'
 export var PlayView = {
   init: function() {
     this.$play_area = $("<div>"), { id: "play-area" };
@@ -31,7 +31,7 @@ export var PlayView = {
       this.$play_area.append(this.$answers);
       $("#main-area").html(this.$play_area);
     } else {
-      MainController.changeView("gameover");
+       PlayController.changeToGameOverView();
     }
   },
   currentQuestion: function() {
@@ -44,8 +44,5 @@ export var PlayView = {
       html += "<button class='btn-answer'>" + answer + "</button>";
     });
     return html;
-  },
-  remove: function() {
-    this.$play_area.remove();
   }
 };

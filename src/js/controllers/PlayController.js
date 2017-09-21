@@ -1,4 +1,5 @@
 import { QuizModel } from '../models/QuizModel.js';
+import { MainController } from './MainController.js';
 import { PlayView } from '../views/PlayView.js';
 
 export var PlayController = {
@@ -23,9 +24,11 @@ export var PlayController = {
   },
   increaseCorrectAnswerCounter: function(){
     QuizModel.numOfCorrect++;
-  }
-  ,
+  },
   getCorrectAnswerCounter: function(){
     return QuizModel.numOfCorrect;
+  },
+  changeToGameOverView: function(){
+    MainController.changeView("gameover");
   }
 };

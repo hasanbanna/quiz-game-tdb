@@ -1,6 +1,11 @@
 import { QuizModel } from '../models/QuizModel.js';
-import { GameOverView } from '../views/GameOverView.js'
-export var GameOverController = {
+import { GameOverView } from '../views/GameOverView.js';
+import { MainController } from './MainController.js';
+
+export const GameOverController = {
+  init: function(){
+    GameOverView.init();
+  },
   getScore: function() {
     return QuizModel.score;
   },
@@ -11,3 +16,4 @@ export var GameOverController = {
   	return QuizModel.numOfCorrect;
   }
 };
+GameOverController.__proto__ = MainController;

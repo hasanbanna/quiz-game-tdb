@@ -1,4 +1,4 @@
-import { MainController } from '../controllers/MainController.js'
+import { MainMenuController } from '../controllers/MainMenuController.js'
 
 export var MainMenuView = {
   init: function() {
@@ -24,7 +24,7 @@ export var MainMenuView = {
 
     // click to go to play view
     this.$start_button.html("start");
-    this.$start_button.on("click", this.changeToPlayView.bind(this));
+    this.$start_button.on("click", MainMenuController.changetoPlayView.bind(this));
 
     this.$options.append("<label for='category'>Category</label>");
     this.$options.append(this.$select_category);
@@ -38,7 +38,7 @@ export var MainMenuView = {
     $("#main-area").append(this.$main_menu);
   },
   populateCategories: function() {
-    var cats = MainController.getCategories();
+    var cats = MainMenuController.getCategories();
     var html = "";
     cats.forEach(function(cat) {
       html += "<option value='" + cat + "'>" + cat + "</option>";
@@ -46,18 +46,12 @@ export var MainMenuView = {
     return html;
   },
   populateDifficulties: function() {
-    var difficulties = MainController.getDifficulties();
+    var difficulties = MainMenuController.getDifficulties();
     var html = "";
     difficulties.forEach(function(difficulty) {
       html +=
         "<option value='" + difficulty + "'>" + difficulty + "</option>";
     });
     return html;
-  },
-  changeToPlayView: function() {
-    MainController.changeView("play");
-  },
-  remove: function() {
-    this.$main_menu.remove();
   }
 };

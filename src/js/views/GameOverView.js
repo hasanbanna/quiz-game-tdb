@@ -1,4 +1,4 @@
-import { MainController } from '../controllers/MainController.js'
+import { MainMenuController } from '../controllers/MainMenuController.js'
 import { GameOverController } from '../controllers/GameOverController.js'
 export var GameOverView = {
   init: function() {
@@ -7,7 +7,7 @@ export var GameOverView = {
       id: "reset-btn",
       text: "reset",
       click: function(){
-        MainController.changeView("main");
+        MainMenuController.changeView("main");
       }
     });
     this.answer_correctly = GameOverController.getNumberOfCorrect();
