@@ -5,7 +5,7 @@ import { MainMenuView } from '../views/MainMenuView.js'
 import { PlayView } from '../views/PlayView.js'
 import { GameOverView } from '../views/GameOverView.js'
 
-export var MainController = {
+export const MainController = {
   init: function() {
     QuizModel.init();
     this.addQuestions();

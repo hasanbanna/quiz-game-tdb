@@ -2,7 +2,7 @@ import { PlayController } from '../controllers/PlayController.js'
 import { MainController } from '../controllers/MainController.js'
 export var PlayView = {
   init: function() {
-    (this.$play_area = $("<div>")), { id: "play-area" };
+    this.$play_area = $("<div>"), { id: "play-area" };
     this.$question = $("<h1>", { class: "question" });
     this.$answers = $("<div>", { class: "answers" });
     this.render();
@@ -11,7 +11,7 @@ export var PlayView = {
     // probably refactor this code
     var currentQuestionNumber = PlayController.currentQuestionNumber;
     var numberOfQuestions = PlayController.getNumOfQuestions();
-    if (currentQuestion < currentQuestionNumber) {
+    if (currentQuestionNumber< numberOfQuestions) {
       this.$question.html(this.currentQuestion());
       this.$play_area.html(this.$question);
       this.$answers.html(this.populateAnswers());

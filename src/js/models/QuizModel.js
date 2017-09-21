@@ -23,7 +23,6 @@ export var QuizModel = {
     return this.numOfQuestions;
   },
   getCurrentQuestion: function(index) {
-    console.log("the index is " + index);
     return this.quiz[index].question;
   },
   getCurrentAnswers: function(index) {

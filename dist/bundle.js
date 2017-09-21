@@ -68,7 +68,6 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainController; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PlayController_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__GameOverController_js__ = __webpack_require__(4);
@@ -82,7 +81,7 @@
 
 
 
-var MainController = {
+const MainController = {
   init: function() {
     __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].init();
     this.addQuestions();
@@ -143,6 +142,9 @@ var MainController = {
     }
   }
 };
+/* harmony export (immutable) */ __webpack_exports__["a"] = MainController;
+
+
 
 /***/ }),
 /* 1 */
@@ -196,6 +198,7 @@ var QuizModel = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_PlayView_js__ = __webpack_require__(3);
 
 
+
 var PlayController = {
   init: function() {
     this.currentQuestionNumber = 0;
@@ -225,6 +228,7 @@ var PlayController = {
   }
 };
 
+
 /***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -237,16 +241,16 @@ var PlayController = {
 
 var PlayView = {
   init: function() {
-    (this.$play_area = $("<div>")), { id: "play-area" };
+    this.$play_area = $("<div>"), { id: "play-area" };
     this.$question = $("<h1>", { class: "question" });
     this.$answers = $("<div>", { class: "answers" });
     this.render();
   },
   render: function() {
-    var cQ = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].currentQuestionNumber;
-    var nQ = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getNumOfQuestions();
-    console.log(cQ, nQ);
-    if (cQ < nQ) {
+    // probably refactor this code
+    var currentQuestionNumber = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].currentQuestionNumber;
+    var numberOfQuestions = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getNumOfQuestions();
+    if (currentQuestionNumber< numberOfQuestions) {
       this.$question.html(this.currentQuestion());
       this.$play_area.html(this.$question);
       this.$answers.html(this.populateAnswers());
@@ -284,6 +288,7 @@ var PlayView = {
     this.$play_area.remove();
   }
 };
+
 
 /***/ }),
 /* 4 */
@@ -360,15 +365,7 @@ var GameOverView = {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__ = __webpack_require__(0);
-// import { QuizModel } from './models/QuizModel.js';
-// import { MainController } from './controllers/MainController.js'
-// import { PlayController } from './controllers/PlayController.js'
-// import { GameOverController } from './controllers/GameOverController.js'
 
-
-// import { MainMenuView } from './views/MainMenuView.js'
-// import { PlayView } from './views/PlayView.js'
-// import { GameOverView } from './views/GameOverView.js'
 (function() {
   __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__["a" /* MainController */].init();
 })();

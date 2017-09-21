@@ -1,5 +1,6 @@
 import { QuizModel } from '../models/QuizModel.js';
-import { PlayView } from '../views/PlayView.js'
+import { PlayView } from '../views/PlayView.js';
+
 export var PlayController = {
   init: function() {
     this.currentQuestionNumber = 0;
