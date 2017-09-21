@@ -5,8 +5,8 @@ body{
   margin: 0 auto;
   width:550px;
   min-height:350px;
-/*   temporary colour */
-  background-color:#FAEBD7; 
+  /* temporary colour */
+  background-color:#FDF3E7; 
   position:relative;
   border: 1px dashed orange;
 }
@@ -33,10 +33,11 @@ body{
   width:150px;
   height:45px;
   border:none;
-  background-color:#B8E986;
+  background-color:#C63D0F;
   position:absolute;
   top:140px;
   left:200px;
+  cursor:pointer;
 }
 #btn-start:focus{
   outline:none;
@@ -44,7 +45,7 @@ body{
   cursor:pointer;
 }
 #btn-start:hover{
-  background: #B4E583;
+  background: #C22D00;
   color:#1A1A1A;
 }
 select{

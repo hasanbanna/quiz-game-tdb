@@ -1,34 +1,51 @@
+import {
+  categoriesJSON
+} from "./categories.js";
+
 export var QuizModel = {
-  init: function() {
-    this.categories = ["General Knowledge"];
+  init: function () {
+    this.categories = this.addCategories();
     this.difficulty = ["Easy", "Medium", "Hard"];
     this.score = 0;
     this.quiz = [];
     this.numOfQuestions = 0;
     this.numOfCorrect = 0;
+    this.selectedCategory = "";
   },
-  getQuiz: function() {
+  getQuiz: function () {
     return this.quiz;
   },
-  addQuestionAndAnswers: function(quiz_obj) {
+  addQuestionAndAnswers: function (quiz_obj) {
     this.quiz.push(quiz_obj);
   },
-  getCategories: function() {
+  getCategories: function () {
     return this.categories;
   },
-  getDifficulties: function() {
+  getDifficulties: function () {
     return this.difficulty;
   },
-  getNumOfQuestions: function() {
+  getNumOfQuestions: function () {
     return this.numOfQuestions;
   },
-  getCurrentQuestion: function(index) {
+  getCurrentQuestion: function (index) {
     return this.quiz[index].question;
   },
-  getCurrentAnswers: function(index) {
+  getCurrentAnswers: function (index) {
     return this.quiz[index].answers;
   },
-  getCorrectAnswer: function(index) {
+  getCorrectAnswer: function (index) {
     return this.quiz[index].correct_answer;
+  },
+  addCategories: function () {
+    return categoriesJSON.map(function (category) {
+      return category.name;
+    });
+  },
+  // change this so that it returns id to be used in the ajax call
+  setSelectedCategory: function(str){
+    this.selectedCategory = str;
+  },
+  getSelectedCategory: function(){
+    return this.selectedCategory;
   }
 };

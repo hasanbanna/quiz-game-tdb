@@ -16,6 +16,8 @@ export var PlayView = {
       this.$play_area.html(this.$question);
       this.$answers.html(this.populateAnswers());
       // on click return the answer
+      this.$answers.hide();
+      this.$answers.fadeIn(350);
       this.$answers.on("click", "button", function(e) {
         if ($(this).is(":button")) {
           var answer = $(this).html();

@@ -1,10 +1,16 @@
 import { MainMenuController } from '../controllers/MainMenuController.js'
 
 export var MainMenuView = {
-  init: function() {
-    this.$main_menu = $("<div>", { class: "main-menu" });
-    this.$title = $("<div>", {class: "title"});
-    this.$options = $("<div>", { class: "options" });
+  init: function () {
+    this.$main_menu = $("<div>", {
+      class: "main-menu"
+    });
+    this.$title = $("<div>", {
+      class: "title"
+    });
+    this.$options = $("<div>", {
+      class: "options"
+    });
     this.$select_category = $("<select>", {
       name: "category",
       id: "select-category",
@@ -15,40 +21,53 @@ export var MainMenuView = {
       id: "select-difficulty",
       class: "difficulty"
     });
-    this.$start_button = $("<button>", { id: "btn-start" });
+    this.$start_button = $("<button>", {
+      id: "btn-start"
+    });
     this.render();
   },
-  render: function() {
+  render: function () {
     this.$select_category.html(this.populateCategories());
     this.$select_difficulty.html(this.populateDifficulties());
-
     // click to go to play view
     this.$start_button.html("start");
     this.$start_button.on("click", MainMenuController.changetoPlayView.bind(this));
 
     this.$options.append("<label for='category'>Category</label>");
     this.$options.append(this.$select_category);
+    this.$select_category.val($("#select-category option:first").val());
+    
+    this.$select_category.change(function(){
+      var str = "";
+      $( "#select-category option:selected" ).each(function() {
+        str += $( this ).text();
+      });
+      MainMenuController.setCategory(str);
+    }).trigger("change");
+
     this.$options.append("<br><label for='category'>Difficulty</label>");
     this.$options.append(this.$select_difficulty);
     this.$options.append(this.$start_button);
+
     this.$main_menu.html(this.$options);
 
     this.$title.append("Quiz Time");
     $("#main-area").append(this.$title);
     $("#main-area").append(this.$main_menu);
+    
   },
-  populateCategories: function() {
+  populateCategories: function () {
     var cats = MainMenuController.getCategories();
     var html = "";
-    cats.forEach(function(cat) {
+    cats.forEach(function (cat) {
       html += "<option value='" + cat + "'>" + cat + "</option>";
     });
     return html;
   },
-  populateDifficulties: function() {
+  populateDifficulties: function () {
     var difficulties = MainMenuController.getDifficulties();
     var html = "";
-    difficulties.forEach(function(difficulty) {
+    difficulties.forEach(function (difficulty) {
       html +=
         "<option value='" + difficulty + "'>" + difficulty + "</option>";
     });

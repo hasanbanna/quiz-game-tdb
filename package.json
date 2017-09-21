@@ -19,5 +19,8 @@
   "homepage": "https://github.com/hasanbanna/quiz-game-tdb#readme",
   "devDependencies": {
     "webpack": "3.6.0"
+  },
+  "dependencies": {
+    "eslint": "4.7.2"
   }
 }

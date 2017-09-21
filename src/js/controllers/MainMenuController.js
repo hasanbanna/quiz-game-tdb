@@ -1,25 +1,24 @@
-import {QuizModel} from "../models/QuizModel.js";
-import { MainController}  from './MainController.js';
+import { QuizModel } from "../models/QuizModel.js";
+import { MainController } from './MainController.js';
 import { MainMenuView } from '../views/MainMenuView.js';
 export const MainMenuController = {
-  init: function() {
+  init: function () {
     QuizModel.init();
     this.addQuestions();
     MainMenuView.init();
   },
-  getCategories: function() {
+  getCategories: function () {
     return QuizModel.getCategories();
   },
-  getDifficulties: function() {
+  getDifficulties: function () {
     return QuizModel.getDifficulties();
   },
-  addQuestions: function() {
+  addQuestions: function () {
     $.ajax({
-      url:
-        "https://opentdb.com/api.php?amount=2&category=9&difficulty=easy&type=multiple",
-      success: function(result) {
+      url: "https://opentdb.com/api.php?amount=2&category=9&difficulty=easy&type=multiple",
+      success: function (result) {
         var len = result.results.length;
-        result.results.forEach(function(res) {
+        result.results.forEach(function (res) {
           var answers = res.incorrect_answers.concat(res.correct_answer);
           var correct_answer = res.correct_answer;
           var question = res.question;
@@ -32,12 +31,15 @@ export const MainMenuController = {
           QuizModel.numOfQuestions++;
         });
       },
-      error: function(res) {
+      error: function (res) {
         console.log("error accessing api " + JSON.stringify(res));
       }
     });
   },
-  changetoPlayView: function() {
+  changetoPlayView: function () {
     MainController.changeView("play");
+  },
+  setCategory: function(str){
+    QuizModel.setCategory(str);
   }
 };

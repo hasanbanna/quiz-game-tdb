@@ -2,7 +2,7 @@ import { QuizModel } from '../models/QuizModel.js';
 import { PlayController } from './PlayController.js';
 import  { MainMenuController } from './MainMenuController.js';
 import { GameOverController } from './GameOverController.js';
-// all controllers 'inherit' from this controller;
+// all controllers 'inherit' from this controller
 export const MainController = {
   init: function(){
     this.$main_menu = $("#main-area");
@@ -18,6 +18,9 @@ export const MainController = {
     }else if (view == "gameover"){
       this.remove();
       GameOverController.init();
+    }else if (view == "main"){
+      this.remove();
+      MainMenuController.init();
     }
   },
   shuffle: function(a) {
