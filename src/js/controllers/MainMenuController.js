@@ -4,8 +4,8 @@ import { MainMenuView } from '../views/MainMenuView.js';
 export const MainMenuController = {
   init: function () {
     QuizModel.init();
-    this.addQuestions();
     MainMenuView.init();
+    // this.addQuestions();
   },
   getCategories: function () {
     return QuizModel.getCategories();
@@ -14,8 +14,9 @@ export const MainMenuController = {
     return QuizModel.getDifficulties();
   },
   addQuestions: function () {
+    const catId = QuizModel.getSelectedCategoryId();
     $.ajax({
-      url: "https://opentdb.com/api.php?amount=2&category=9&difficulty=easy&type=multiple",
+      url: "https://opentdb.com/api.php?amount=2&category="+catId+"&difficulty=easy&type=multiple",
       success: function (result) {
         var len = result.results.length;
         result.results.forEach(function (res) {
@@ -33,6 +34,9 @@ export const MainMenuController = {
       },
       error: function (res) {
         console.log("error accessing api " + JSON.stringify(res));
+      },
+      complete: function(res){
+        MainMenuController.changetoPlayView();
       }
     });
   },
@@ -40,6 +44,6 @@ export const MainMenuController = {
     MainController.changeView("play");
   },
   setCategory: function(str){
-    QuizModel.setCategory(str);
+    QuizModel.setSelectedCategory(str);
   }
 };

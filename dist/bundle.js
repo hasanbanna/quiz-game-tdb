@@ -65,39 +65,46 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PlayController_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MainMenuController_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__GameOverController_js__ = __webpack_require__(4);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MainController = undefined;
 
+var _QuizModel = __webpack_require__(1);
+
+var _PlayController = __webpack_require__(3);
+
+var _MainMenuController = __webpack_require__(2);
+
+var _GameOverController = __webpack_require__(4);
 
 // all controllers 'inherit' from this controller
-const MainController = {
-  init: function(){
+var MainController = exports.MainController = {
+  init: function init() {
     this.$main_menu = $("#main-area");
-    __WEBPACK_IMPORTED_MODULE_2__MainMenuController_js__["a" /* MainMenuController */].init();
+    _MainMenuController.MainMenuController.init();
   },
-  remove: function() {
+  remove: function remove() {
     this.$main_menu.html("");
   },
-  changeView: function(view) {
-    if(view == "play"){
+  changeView: function changeView(view) {
+    if (view == "play") {
       this.remove();
-      __WEBPACK_IMPORTED_MODULE_1__PlayController_js__["a" /* PlayController */].init();
-    }else if (view == "gameover"){
+      _PlayController.PlayController.init();
+    } else if (view == "gameover") {
       this.remove();
-      __WEBPACK_IMPORTED_MODULE_3__GameOverController_js__["a" /* GameOverController */].init();
-    }else if (view == "main"){
+      _GameOverController.GameOverController.init();
+    } else if (view == "main") {
       this.remove();
-      __WEBPACK_IMPORTED_MODULE_2__MainMenuController_js__["a" /* MainMenuController */].init();
+      _MainMenuController.MainMenuController.init();
     }
   },
-  shuffle: function(a) {
+  shuffle: function shuffle(a) {
     var j, x, i;
     for (i = a.length; i; i--) {
       j = Math.floor(Math.random() * i);
@@ -107,21 +114,23 @@ const MainController = {
     }
   }
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = MainController;
-
-
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuizModel; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__categories_js__ = __webpack_require__(6);
 
 
-var QuizModel = {
-  init: function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.QuizModel = undefined;
+
+var _categories = __webpack_require__(6);
+
+var QuizModel = exports.QuizModel = {
+  init: function init() {
     this.categories = this.addCategories();
     this.difficulty = ["Easy", "Medium", "Hard"];
     this.score = 0;
@@ -130,360 +139,373 @@ var QuizModel = {
     this.numOfCorrect = 0;
     this.selectedCategory = "";
   },
-  getQuiz: function () {
+  getQuiz: function getQuiz() {
     return this.quiz;
   },
-  addQuestionAndAnswers: function (quiz_obj) {
+  addQuestionAndAnswers: function addQuestionAndAnswers(quiz_obj) {
     this.quiz.push(quiz_obj);
   },
-  getCategories: function () {
+  getCategories: function getCategories() {
     return this.categories;
   },
-  getDifficulties: function () {
+  getDifficulties: function getDifficulties() {
     return this.difficulty;
   },
-  getNumOfQuestions: function () {
+  getNumOfQuestions: function getNumOfQuestions() {
     return this.numOfQuestions;
   },
-  getCurrentQuestion: function (index) {
+  getCurrentQuestion: function getCurrentQuestion(index) {
     return this.quiz[index].question;
   },
-  getCurrentAnswers: function (index) {
+  getCurrentAnswers: function getCurrentAnswers(index) {
     return this.quiz[index].answers;
   },
-  getCorrectAnswer: function (index) {
+  getCorrectAnswer: function getCorrectAnswer(index) {
     return this.quiz[index].correct_answer;
   },
-  addCategories: function () {
-    return __WEBPACK_IMPORTED_MODULE_0__categories_js__["a" /* categoriesJSON */].map(function (category) {
+  addCategories: function addCategories() {
+    return _categories.categoriesJSON.map(function (category) {
       return category.name;
     });
   },
-  setCategory: function(str){
+  // change this so that it returns id to be used in the ajax call
+  setSelectedCategory: function setSelectedCategory(str) {
     this.selectedCategory = str;
+  },
+  getSelectedCategory: function getSelectedCategory() {
+    return this.selectedCategory;
+  },
+  getSelectedCategoryId: function getSelectedCategoryId() {
+    var selected = this.getSelectedCategory();
+    console.log(selected);
+    return _categories.categoriesJSON.filter(function (category) {
+      if (category.name === selected) {
+        return category;
+      }
+    })[0].id;
   }
 };
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MainController_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_MainMenuView_js__ = __webpack_require__(8);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MainMenuController = undefined;
 
-const MainMenuController = {
-  init: function () {
-    __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].init();
-    this.addQuestions();
-    __WEBPACK_IMPORTED_MODULE_2__views_MainMenuView_js__["a" /* MainMenuView */].init();
+var _QuizModel = __webpack_require__(1);
+
+var _MainController = __webpack_require__(0);
+
+var _MainMenuView = __webpack_require__(8);
+
+var MainMenuController = exports.MainMenuController = {
+  init: function init() {
+    _QuizModel.QuizModel.init();
+    _MainMenuView.MainMenuView.init();
+    // this.addQuestions();
   },
-  getCategories: function () {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].getCategories();
+  getCategories: function getCategories() {
+    return _QuizModel.QuizModel.getCategories();
   },
-  getDifficulties: function () {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].getDifficulties();
+  getDifficulties: function getDifficulties() {
+    return _QuizModel.QuizModel.getDifficulties();
   },
-  addQuestions: function () {
+  addQuestions: function addQuestions() {
+    var catId = _QuizModel.QuizModel.getSelectedCategoryId();
     $.ajax({
-      url: "https://opentdb.com/api.php?amount=2&category=9&difficulty=easy&type=multiple",
-      success: function (result) {
+      url: "https://opentdb.com/api.php?amount=2&category=" + catId + "&difficulty=easy&type=multiple",
+      success: function success(result) {
         var len = result.results.length;
         result.results.forEach(function (res) {
           var answers = res.incorrect_answers.concat(res.correct_answer);
           var correct_answer = res.correct_answer;
           var question = res.question;
-          __WEBPACK_IMPORTED_MODULE_1__MainController_js__["a" /* MainController */].shuffle(answers);
-          __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].addQuestionAndAnswers({
+          _MainController.MainController.shuffle(answers);
+          _QuizModel.QuizModel.addQuestionAndAnswers({
             question: question,
             answers: answers,
             correct_answer: correct_answer
           });
-          __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfQuestions++;
+          _QuizModel.QuizModel.numOfQuestions++;
         });
       },
-      error: function (res) {
+      error: function error(res) {
         console.log("error accessing api " + JSON.stringify(res));
+      },
+      complete: function complete(res) {
+        MainMenuController.changetoPlayView();
       }
     });
   },
-  changetoPlayView: function () {
-    __WEBPACK_IMPORTED_MODULE_1__MainController_js__["a" /* MainController */].changeView("play");
+  changetoPlayView: function changetoPlayView() {
+    _MainController.MainController.changeView("play");
   },
-  setCategory: function(str){
-    __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].setCategory(str);
+  setCategory: function setCategory(str) {
+    _QuizModel.QuizModel.setSelectedCategory(str);
   }
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = MainMenuController;
-
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayController; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MainController_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_PlayView_js__ = __webpack_require__(7);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PlayController = undefined;
 
+var _QuizModel = __webpack_require__(1);
 
-var PlayController = {
-  init: function() {
+var _MainController = __webpack_require__(0);
+
+var _PlayView = __webpack_require__(7);
+
+var PlayController = exports.PlayController = {
+  init: function init() {
     this.currentQuestionNumber = 0;
-    __WEBPACK_IMPORTED_MODULE_2__views_PlayView_js__["a" /* PlayView */].init();
+    _PlayView.PlayView.init();
   },
-  getCurrentQuestion: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].getCurrentQuestion(this.currentQuestionNumber);
+  getCurrentQuestion: function getCurrentQuestion() {
+    return _QuizModel.QuizModel.getCurrentQuestion(this.currentQuestionNumber);
   },
-  getCurrentAnswers: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].getCurrentAnswers(this.currentQuestionNumber);
+  getCurrentAnswers: function getCurrentAnswers() {
+    return _QuizModel.QuizModel.getCurrentAnswers(this.currentQuestionNumber);
   },
-  getCorrectAnswer: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].getCorrectAnswer(this.currentQuestionNumber);
+  getCorrectAnswer: function getCorrectAnswer() {
+    return _QuizModel.QuizModel.getCorrectAnswer(this.currentQuestionNumber);
   },
-  getNumOfQuestions: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfQuestions;
+  getNumOfQuestions: function getNumOfQuestions() {
+    return _QuizModel.QuizModel.numOfQuestions;
   },
-  increaseScore: function() {
-    __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].score += 20;
+  increaseScore: function increaseScore() {
+    _QuizModel.QuizModel.score += 20;
   },
-  increaseCorrectAnswerCounter: function(){
-    __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfCorrect++;
+  increaseCorrectAnswerCounter: function increaseCorrectAnswerCounter() {
+    _QuizModel.QuizModel.numOfCorrect++;
   },
-  getCorrectAnswerCounter: function(){
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfCorrect;
+  getCorrectAnswerCounter: function getCorrectAnswerCounter() {
+    return _QuizModel.QuizModel.numOfCorrect;
   },
-  changeToGameOverView: function(){
-    __WEBPACK_IMPORTED_MODULE_1__MainController_js__["a" /* MainController */].changeView("gameover");
+  changeToGameOverView: function changeToGameOverView() {
+    _MainController.MainController.changeView("gameover");
   }
 };
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_GameOverView_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MainController_js__ = __webpack_require__(0);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GameOverController = undefined;
 
+var _QuizModel = __webpack_require__(1);
 
-const GameOverController = {
-  init: function(){
-    __WEBPACK_IMPORTED_MODULE_1__views_GameOverView_js__["a" /* GameOverView */].init();
+var _GameOverView = __webpack_require__(9);
+
+var _MainController = __webpack_require__(0);
+
+var GameOverController = exports.GameOverController = {
+  init: function init() {
+    _GameOverView.GameOverView.init();
   },
-  getScore: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].score;
+  getScore: function getScore() {
+    return _QuizModel.QuizModel.score;
   },
-  getNumberOfQuestions: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfQuestions;
+  getNumberOfQuestions: function getNumberOfQuestions() {
+    return _QuizModel.QuizModel.numOfQuestions;
   },
-  getNumberOfCorrect: function(){
-  	return __WEBPACK_IMPORTED_MODULE_0__models_QuizModel_js__["a" /* QuizModel */].numOfCorrect;
+  getNumberOfCorrect: function getNumberOfCorrect() {
+    return _QuizModel.QuizModel.numOfCorrect;
   }
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = GameOverController;
-
-GameOverController.__proto__ = __WEBPACK_IMPORTED_MODULE_2__MainController_js__["a" /* MainController */];
+GameOverController.__proto__ = _MainController.MainController;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__ = __webpack_require__(0);
 
-(function() {
-  __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__["a" /* MainController */].init();
+
+var _MainController = __webpack_require__(0);
+
+(function () {
+  _MainController.MainController.init();
 })();
-
 
 /***/ }),
 /* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-const categoriesJSON = [
-        {
-                "id": "9",
-                "name": "General Knowledge"
-        },
-        {
-                "id": "10",
-                "name": "Books"
-        },
-        {
-                "id": "11",
-                "name": "Film"
-        },
-        {
-                "id": "12",
-                "name": "Music"
-        },
-        {
-                "id": "13",
-                "name": "Musicals &amp; Theatres"
-        },
-        {
-                "id": "14",
-                "name": "Television"
-        },
-        {
-                "id": "15",
-                "name": "Video Games"
-        },
-        {
-                "id": "16",
-                "name": "Board Games"
-        },
-        {
-                "id": "17",
-                "name": "Nature"
-        },
-        {
-                "id": "18",
-                "name": "Computers"
-        },
-        {
-                "id": "19",
-                "name": "Mathematics"
-        },
-        {
-                "id": "20",
-                "name": "Mythology"
-        },
-        {
-                "id": "21",
-                "name": "Sports"
-        },
-        {
-                "id": "22",
-                "name": "Geography"
-        },
-        {
-                "id": "23",
-                "name": "History"
-        },
-        {
-                "id": "24",
-                "name": "Politics"
-        },
-        {
-                "id": "25",
-                "name": "Art"
-        },
-        {
-                "id": "26",
-                "name": "Celebrities"
-        },
-        {
-                "id": "27",
-                "name": "Animals"
-        },
-        {
-                "id": "28",
-                "name": "Vehicles"
-        },
-        {
-                "id": "29",
-                "name": "Comics"
-        },
-        {
-                "id": "30",
-                "name": "Gadgets"
-        },
-        {
-                "id": "31",
-                "name": "Japanese Anime &amp; Manga"
-        },
-        {
-                "id": "32",
-                "name": "Cartoon &amp; Animations"
-        }
-];
-/* harmony export (immutable) */ __webpack_exports__["a"] = categoriesJSON;
 
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+var categoriesJSON = exports.categoriesJSON = [{
+        "id": "9",
+        "name": "General Knowledge"
+}, {
+        "id": "10",
+        "name": "Books"
+}, {
+        "id": "11",
+        "name": "Film"
+}, {
+        "id": "12",
+        "name": "Music"
+}, {
+        "id": "13",
+        "name": "Musicals &amp; Theatres"
+}, {
+        "id": "14",
+        "name": "Television"
+}, {
+        "id": "15",
+        "name": "Video Games"
+}, {
+        "id": "16",
+        "name": "Board Games"
+}, {
+        "id": "17",
+        "name": "Nature"
+}, {
+        "id": "18",
+        "name": "Computers"
+}, {
+        "id": "19",
+        "name": "Mathematics"
+}, {
+        "id": "20",
+        "name": "Mythology"
+}, {
+        "id": "21",
+        "name": "Sports"
+}, {
+        "id": "22",
+        "name": "Geography"
+}, {
+        "id": "23",
+        "name": "History"
+}, {
+        "id": "24",
+        "name": "Politics"
+}, {
+        "id": "25",
+        "name": "Art"
+}, {
+        "id": "26",
+        "name": "Celebrities"
+}, {
+        "id": "27",
+        "name": "Animals"
+}, {
+        "id": "28",
+        "name": "Vehicles"
+}, {
+        "id": "29",
+        "name": "Comics"
+}, {
+        "id": "30",
+        "name": "Gadgets"
+}];
 
 /***/ }),
 /* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayView; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers_MainMenuController_js__ = __webpack_require__(2);
 
 
-var PlayView = {
-  init: function() {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PlayView = undefined;
+
+var _PlayController = __webpack_require__(3);
+
+var _MainMenuController = __webpack_require__(2);
+
+var PlayView = exports.PlayView = {
+  init: function init() {
     this.$play_area = $("<div>"), { id: "play-area" };
     this.$question = $("<h1>", { class: "question" });
     this.$answers = $("<div>", { class: "answers" });
     this.render();
   },
-  render: function() {
+  render: function render() {
     // probably refactor this code
-    var currentQuestionNumber = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].currentQuestionNumber;
-    var numberOfQuestions = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getNumOfQuestions();
-    if (currentQuestionNumber< numberOfQuestions) {
+    var currentQuestionNumber = _PlayController.PlayController.currentQuestionNumber;
+    var numberOfQuestions = _PlayController.PlayController.getNumOfQuestions();
+    if (currentQuestionNumber < numberOfQuestions) {
       this.$question.html(this.currentQuestion());
       this.$play_area.html(this.$question);
       this.$answers.html(this.populateAnswers());
       // on click return the answer
       this.$answers.hide();
       this.$answers.fadeIn(350);
-      this.$answers.on("click", "button", function(e) {
+      this.$answers.on("click", "button", function (e) {
         if ($(this).is(":button")) {
           var answer = $(this).html();
-          var correctAnswer = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getCorrectAnswer();
+          var correctAnswer = _PlayController.PlayController.getCorrectAnswer();
           if (answer === correctAnswer) {
-            __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].increaseCorrectAnswerCounter();
-            __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].increaseScore();
+            _PlayController.PlayController.increaseCorrectAnswerCounter();
+            _PlayController.PlayController.increaseScore();
           }
-          __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].currentQuestionNumber++;
+          _PlayController.PlayController.currentQuestionNumber++;
           PlayView.init();
         }
       });
       this.$play_area.append(this.$answers);
       $("#main-area").html(this.$play_area);
     } else {
-       __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].changeToGameOverView();
+      _PlayController.PlayController.changeToGameOverView();
     }
   },
-  currentQuestion: function() {
-    return __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getCurrentQuestion();
+  currentQuestion: function currentQuestion() {
+    return _PlayController.PlayController.getCurrentQuestion();
   },
-  populateAnswers: function() {
-    var answers = __WEBPACK_IMPORTED_MODULE_0__controllers_PlayController_js__["a" /* PlayController */].getCurrentAnswers();
+  populateAnswers: function populateAnswers() {
+    var answers = _PlayController.PlayController.getCurrentAnswers();
     var html = "";
-    answers.forEach(function(answer) {
+    answers.forEach(function (answer) {
       html += "<button class='btn-answer'>" + answer + "</button>";
     });
     return html;
   }
 };
 
-
 /***/ }),
 /* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainMenuView; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_MainMenuController_js__ = __webpack_require__(2);
 
 
-var MainMenuView = {
-  init: function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MainMenuView = undefined;
+
+var _MainMenuController = __webpack_require__(2);
+
+var MainMenuView = exports.MainMenuView = {
+  init: function init() {
     this.$main_menu = $("<div>", {
       class: "main-menu"
     });
@@ -508,23 +530,24 @@ var MainMenuView = {
     });
     this.render();
   },
-  render: function () {
+  render: function render() {
     this.$select_category.html(this.populateCategories());
     this.$select_difficulty.html(this.populateDifficulties());
     // click to go to play view
     this.$start_button.html("start");
-    this.$start_button.on("click", __WEBPACK_IMPORTED_MODULE_0__controllers_MainMenuController_js__["a" /* MainMenuController */].changetoPlayView.bind(this));
-
+    this.$start_button.on("click", function () {
+      _MainMenuController.MainMenuController.addQuestions();
+    });
     this.$options.append("<label for='category'>Category</label>");
     this.$options.append(this.$select_category);
-    this.$select_category.val($("#select-category option:first").val());
-    
-    this.$select_category.change(function(){
+
+    this.$select_category.change(function () {
       var str = "";
-      $( "#select-category option:selected" ).each(function() {
-        str += $( this ).text();
+      $("#select-category option:selected").each(function () {
+        str += $(this).text();
       });
-      __WEBPACK_IMPORTED_MODULE_0__controllers_MainMenuController_js__["a" /* MainMenuController */].setCategory(str);
+      _MainMenuController.MainMenuController.setCategory(str);
+      // MainMenuController.addQuestions();
     }).trigger("change");
 
     this.$options.append("<br><label for='category'>Difficulty</label>");
@@ -536,22 +559,20 @@ var MainMenuView = {
     this.$title.append("Quiz Time");
     $("#main-area").append(this.$title);
     $("#main-area").append(this.$main_menu);
-    
   },
-  populateCategories: function () {
-    var cats = __WEBPACK_IMPORTED_MODULE_0__controllers_MainMenuController_js__["a" /* MainMenuController */].getCategories();
+  populateCategories: function populateCategories() {
+    var cats = _MainMenuController.MainMenuController.getCategories();
     var html = "";
     cats.forEach(function (cat) {
       html += "<option value='" + cat + "'>" + cat + "</option>";
     });
     return html;
   },
-  populateDifficulties: function () {
-    var difficulties = __WEBPACK_IMPORTED_MODULE_0__controllers_MainMenuController_js__["a" /* MainMenuController */].getDifficulties();
+  populateDifficulties: function populateDifficulties() {
+    var difficulties = _MainMenuController.MainMenuController.getDifficulties();
     var html = "";
     difficulties.forEach(function (difficulty) {
-      html +=
-        "<option value='" + difficulty + "'>" + difficulty + "</option>";
+      html += "<option value='" + difficulty + "'>" + difficulty + "</option>";
     });
     return html;
   }
@@ -559,42 +580,43 @@ var MainMenuView = {
 
 /***/ }),
 /* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameOverView; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers_GameOverController_js__ = __webpack_require__(4);
 
 
-var GameOverView = {
-  init: function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GameOverView = undefined;
+
+var _MainController = __webpack_require__(0);
+
+var _GameOverController = __webpack_require__(4);
+
+var GameOverView = exports.GameOverView = {
+  init: function init() {
     this.$game_over = $("<div>", {
       id: "gameover"
     });
     this.$reset_btn = $("<button>", {
       id: "reset-btn",
       text: "reset",
-      click: function () {
-        __WEBPACK_IMPORTED_MODULE_0__controllers_MainController_js__["a" /* MainController */].changeView("main");
+      click: function click() {
+        _MainController.MainController.changeView("main");
       }
     });
-    this.answer_correctly = __WEBPACK_IMPORTED_MODULE_1__controllers_GameOverController_js__["a" /* GameOverController */].getNumberOfCorrect();
-    this.num_of_questions = __WEBPACK_IMPORTED_MODULE_1__controllers_GameOverController_js__["a" /* GameOverController */].getNumberOfQuestions();
+    this.answer_correctly = _GameOverController.GameOverController.getNumberOfCorrect();
+    this.num_of_questions = _GameOverController.GameOverController.getNumberOfQuestions();
     this.$score_show = $("<div>", {
       id: "score"
     });
-    this.$score = __WEBPACK_IMPORTED_MODULE_1__controllers_GameOverController_js__["a" /* GameOverController */].getScore();
+    this.$score = _GameOverController.GameOverController.getScore();
     this.render();
   },
-  render: function () {
+  render: function render() {
     var html = "";
-    html +=
-      "<b> " +
-      this.answer_correctly +
-      " / " +
-      this.num_of_questions +
-      " </b><br><br>";
+    html += "<b> " + this.answer_correctly + " / " + this.num_of_questions + " </b><br><br>";
     html += "Score: " + this.$score;
     this.$game_over.append("<h1 class='title'>Quiz Finished</h1>");
     this.$score_show.html(html);
@@ -606,3 +628,4 @@ var GameOverView = {
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

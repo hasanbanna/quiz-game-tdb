@@ -86,13 +86,5 @@ export const categoriesJSON = [
         {
                 "id": "30",
                 "name": "Gadgets"
-        },
-        {
-                "id": "31",
-                "name": "Japanese Anime &amp; Manga"
-        },
-        {
-                "id": "32",
-                "name": "Cartoon &amp; Animations"
         }
 ];

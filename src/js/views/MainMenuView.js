@@ -31,20 +31,21 @@ export var MainMenuView = {
     this.$select_difficulty.html(this.populateDifficulties());
     // click to go to play view
     this.$start_button.html("start");
-    this.$start_button.on("click", MainMenuController.changetoPlayView.bind(this));
-
+    this.$start_button.on("click", function(){
+     MainMenuController.addQuestions();
+    });
     this.$options.append("<label for='category'>Category</label>");
     this.$options.append(this.$select_category);
-    this.$select_category.val($("#select-category option:first").val());
-    
+  
     this.$select_category.change(function(){
       var str = "";
       $( "#select-category option:selected" ).each(function() {
         str += $( this ).text();
       });
       MainMenuController.setCategory(str);
+      // MainMenuController.addQuestions();
     }).trigger("change");
-
+    
     this.$options.append("<br><label for='category'>Difficulty</label>");
     this.$options.append(this.$select_difficulty);
     this.$options.append(this.$start_button);
