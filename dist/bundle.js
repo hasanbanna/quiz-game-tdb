@@ -138,6 +138,7 @@ var QuizModel = exports.QuizModel = {
     this.numOfQuestions = 0;
     this.numOfCorrect = 0;
     this.selectedCategory = "";
+    this.selectedDifficulty = "";
   },
   getQuiz: function getQuiz() {
     return this.quiz;
@@ -177,12 +178,17 @@ var QuizModel = exports.QuizModel = {
   },
   getSelectedCategoryId: function getSelectedCategoryId() {
     var selected = this.getSelectedCategory();
-    console.log(selected);
     return _categories.categoriesJSON.filter(function (category) {
       if (category.name === selected) {
         return category;
       }
     })[0].id;
+  },
+  setSelectedDifficulty: function setSelectedDifficulty(str) {
+    this.selectedDifficulty = str;
+  },
+  getSelectedDifficulty: function getSelectedDifficulty(str) {
+    return this.selectedDifficulty;
   }
 };
 
@@ -208,7 +214,6 @@ var MainMenuController = exports.MainMenuController = {
   init: function init() {
     _QuizModel.QuizModel.init();
     _MainMenuView.MainMenuView.init();
-    // this.addQuestions();
   },
   getCategories: function getCategories() {
     return _QuizModel.QuizModel.getCategories();
@@ -218,8 +223,11 @@ var MainMenuController = exports.MainMenuController = {
   },
   addQuestions: function addQuestions() {
     var catId = _QuizModel.QuizModel.getSelectedCategoryId();
+    var difficulty = _QuizModel.QuizModel.getSelectedDifficulty().toLowerCase();
+    var url = "https://opentdb.com/api.php?amount=2&category=" + catId + "&difficulty=" + difficulty + "&type=multiple";
+    console.log(url);
     $.ajax({
-      url: "https://opentdb.com/api.php?amount=2&category=" + catId + "&difficulty=easy&type=multiple",
+      url: url,
       success: function success(result) {
         var len = result.results.length;
         result.results.forEach(function (res) {
@@ -246,8 +254,11 @@ var MainMenuController = exports.MainMenuController = {
   changetoPlayView: function changetoPlayView() {
     _MainController.MainController.changeView("play");
   },
-  setCategory: function setCategory(str) {
+  setSelectedCategory: function setSelectedCategory(str) {
     _QuizModel.QuizModel.setSelectedCategory(str);
+  },
+  setSelectedDifficulty: function setSelectedDifficulty(str) {
+    _QuizModel.QuizModel.setSelectedDifficulty(str);
   }
 };
 
@@ -369,9 +380,6 @@ var categoriesJSON = exports.categoriesJSON = [{
 }, {
         "id": "12",
         "name": "Music"
-}, {
-        "id": "13",
-        "name": "Musicals &amp; Theatres"
 }, {
         "id": "14",
         "name": "Television"
@@ -546,10 +554,16 @@ var MainMenuView = exports.MainMenuView = {
       $("#select-category option:selected").each(function () {
         str += $(this).text();
       });
-      _MainMenuController.MainMenuController.setCategory(str);
-      // MainMenuController.addQuestions();
+      _MainMenuController.MainMenuController.setSelectedCategory(str);
     }).trigger("change");
 
+    this.$select_difficulty.change(function () {
+      var str = "";
+      $("#select-difficulty option:selected").each(function () {
+        str += $(this).text();
+      });
+      _MainMenuController.MainMenuController.setSelectedDifficulty(str);
+    });
     this.$options.append("<br><label for='category'>Difficulty</label>");
     this.$options.append(this.$select_difficulty);
     this.$options.append(this.$start_button);

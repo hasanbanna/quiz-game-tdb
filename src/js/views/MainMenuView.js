@@ -42,10 +42,16 @@ export var MainMenuView = {
       $( "#select-category option:selected" ).each(function() {
         str += $( this ).text();
       });
-      MainMenuController.setCategory(str);
-      // MainMenuController.addQuestions();
+      MainMenuController.setSelectedCategory(str);
     }).trigger("change");
     
+    this.$select_difficulty.change(function(){
+      var str = "";
+      $( "#select-difficulty option:selected" ).each(function() {
+        str += $( this ).text();
+      });
+      MainMenuController.setSelectedDifficulty(str);
+    })
     this.$options.append("<br><label for='category'>Difficulty</label>");
     this.$options.append(this.$select_difficulty);
     this.$options.append(this.$start_button);

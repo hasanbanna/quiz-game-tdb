@@ -16,10 +16,6 @@ export const categoriesJSON = [
                 "name": "Music"
         },
         {
-                "id": "13",
-                "name": "Musicals &amp; Theatres"
-        },
-        {
                 "id": "14",
                 "name": "Television"
         },

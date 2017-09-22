@@ -5,7 +5,6 @@ export const MainMenuController = {
   init: function () {
     QuizModel.init();
     MainMenuView.init();
-    // this.addQuestions();
   },
   getCategories: function () {
     return QuizModel.getCategories();
@@ -15,8 +14,11 @@ export const MainMenuController = {
   },
   addQuestions: function () {
     const catId = QuizModel.getSelectedCategoryId();
+    const difficulty = QuizModel.getSelectedDifficulty().toLowerCase();
+    const url = "https://opentdb.com/api.php?amount=2&category="+catId+"&difficulty="+difficulty+"&type=multiple";
+    console.log(url);
     $.ajax({
-      url: "https://opentdb.com/api.php?amount=2&category="+catId+"&difficulty=easy&type=multiple",
+      url: url,
       success: function (result) {
         var len = result.results.length;
         result.results.forEach(function (res) {
@@ -43,7 +45,10 @@ export const MainMenuController = {
   changetoPlayView: function () {
     MainController.changeView("play");
   },
-  setCategory: function(str){
+  setSelectedCategory: function(str){
     QuizModel.setSelectedCategory(str);
+  },
+  setSelectedDifficulty: function(str){
+    QuizModel.setSelectedDifficulty(str);
   }
 };
