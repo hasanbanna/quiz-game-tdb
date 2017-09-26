@@ -1,13 +1,15 @@
 body{
   font-family: 'Oswald';
 }
-.container{
+.game-container{
   margin: 0 auto;
   width:550px;
-  min-height:350px;
-  background-color:white;
-  position:relative;
-  border: 3px dashed orange;
+  max-height:350px;
+  background-color:white;  
+  border: 3px dashed orange;  
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 .title{
   font-size:32px;
@@ -34,11 +36,15 @@ body{
   width:150px;
   height:45px;
   border:none;
-  background-color:#C63D0F;
+  background-color:#0f15c6;
   position:absolute;
-  top:140px;
-  left:200px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  color:white;
   cursor:pointer;
+  margin-top:16%;
+  border-radius: 15px;
 }
 #btn-start:focus{
   outline:none;
@@ -54,25 +60,29 @@ select{
 }
 .question{
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   padding: 15px;
   margin: 20px;
 }
 .answers{
   position:absolute;
-  width: 550px;
+  width: 520px;
   top:50%;
   left:50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
-  margin-left:16px;
+
 }
 .btn-answer{
   width:250px;
-  height:40px;
+  min-height:40px;
   margin:5px;
   border:none;
   float:left;
+  font-size:18px;
+  font-weight:bold;
+  background-color: rgb(143, 165, 229);
+  border-radius: 5px;
 }
 .btn-answer:focus{
   outline:none;
@@ -86,12 +96,12 @@ select{
   text-align: center;
 }
 #reset-btn{
-  margin: 0 auto;
   width: 80px;
   height: 40px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
+  margin-top: 50px;
 }
   
