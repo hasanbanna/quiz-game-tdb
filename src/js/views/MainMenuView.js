@@ -24,6 +24,7 @@ export var MainMenuView = {
     this.$start_button = $("<button>", {
       id: "btn-start"
     });
+    MainMenuController.setSelectedCategory("General Knowledge"); // hacky
     this.render();
   },
   render: function () {
@@ -38,9 +39,9 @@ export var MainMenuView = {
     this.$options.append(this.$select_category);
   
     this.$select_category.change(function(){
-      var str = "";
+      var str = MainMenuController.getSelectedCategory();
       $( "#select-category option:selected" ).each(function() {
-        str += $( this ).text();
+        str = $( this ).text();
       });
       MainMenuController.setSelectedCategory(str);
     }).trigger("change");
