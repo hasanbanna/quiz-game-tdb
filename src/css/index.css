@@ -1,5 +1,5 @@
 body{
-  font-family:"Helvetica"
+  font-family: 'Oswald';
 }
 .container{
   margin: 0 auto;
@@ -18,14 +18,16 @@ body{
 }
 .options{
   margin-top:40px;
- text-align: center;
- position:relative;
+  text-align: center;
+  position:relative;
 }
 .category{
-  margin:10px 0 20px 0;
+  margin:15px;
+  border: 1px solid black;
 }
 .difficulty{
-  margin:10px 0 20px 0;
+  margin:15px;
+  border: 1px solid black;
 }
 #btn-start{
   font-size:26px;
@@ -53,6 +55,8 @@ select{
 .question{
   text-align: center;
   font-size: 18px;
+  padding: 15px;
+  margin: 20px;
 }
 .answers{
   position:absolute;
@@ -77,9 +81,6 @@ select{
   cursor:pointer;
   color:white;
   background-color:pink;
-}
-.question{
-  padding-top: 10px;
 }
 #score{
   text-align: center;
