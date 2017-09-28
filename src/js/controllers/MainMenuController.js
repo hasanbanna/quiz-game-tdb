@@ -48,6 +48,9 @@ export const MainMenuController = {
   setSelectedCategory: function(str){
     QuizModel.setSelectedCategory(str);
   },
+  getSelectedCategory: function(){
+    return QuizModel.getSelectedCategory();
+  },
   setSelectedDifficulty: function(str){
     QuizModel.setSelectedDifficulty(str);
   }

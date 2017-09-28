@@ -51,6 +51,7 @@ export var QuizModel = {
   },
   getSelectedCategoryId: function(){
     const selected = this.getSelectedCategory();
+    console.log(selected);
     return categoriesJSON.filter(function(category){
       if(category.name === selected){ return category; }
     })[0].id;

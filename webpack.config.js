@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
     entry: './src/js/quiz.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
     module: {
