@@ -50,7 +50,7 @@ export var QuizModel = {
     return this.selectedCategory;
   },
   getSelectedCategoryId: function(){
-    const selected = this.getSelectedCategory();
+    const selected = this.getSelectedCategory();    
     console.log(selected);
     return categoriesJSON.filter(function(category){
       if(category.name === selected){ return category; }

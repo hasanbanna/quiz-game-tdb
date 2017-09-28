@@ -178,6 +178,7 @@ var QuizModel = exports.QuizModel = {
   },
   getSelectedCategoryId: function getSelectedCategoryId() {
     var selected = this.getSelectedCategory();
+    console.log(selected);
     return _categories.categoriesJSON.filter(function (category) {
       if (category.name === selected) {
         return category;
@@ -225,7 +226,6 @@ var MainMenuController = exports.MainMenuController = {
     var catId = _QuizModel.QuizModel.getSelectedCategoryId();
     var difficulty = _QuizModel.QuizModel.getSelectedDifficulty().toLowerCase();
     var url = "https://opentdb.com/api.php?amount=2&category=" + catId + "&difficulty=" + difficulty + "&type=multiple";
-    console.log(url);
     $.ajax({
       url: url,
       success: function success(result) {
@@ -256,6 +256,9 @@ var MainMenuController = exports.MainMenuController = {
   },
   setSelectedCategory: function setSelectedCategory(str) {
     _QuizModel.QuizModel.setSelectedCategory(str);
+  },
+  getSelectedCategory: function getSelectedCategory() {
+    return _QuizModel.QuizModel.getSelectedCategory();
   },
   setSelectedDifficulty: function setSelectedDifficulty(str) {
     _QuizModel.QuizModel.setSelectedDifficulty(str);
@@ -514,6 +517,7 @@ var _MainMenuController = __webpack_require__(2);
 
 var MainMenuView = exports.MainMenuView = {
   init: function init() {
+    this.title = "Quiz Gem";
     this.$main_menu = $("<div>", {
       class: "main-menu"
     });
@@ -536,6 +540,7 @@ var MainMenuView = exports.MainMenuView = {
     this.$start_button = $("<button>", {
       id: "btn-start"
     });
+    _MainMenuController.MainMenuController.setSelectedCategory("General Knowledge"); // hacky
     this.render();
   },
   render: function render() {
@@ -550,9 +555,9 @@ var MainMenuView = exports.MainMenuView = {
     this.$options.append(this.$select_category);
 
     this.$select_category.change(function () {
-      var str = "";
+      var str = _MainMenuController.MainMenuController.getSelectedCategory();
       $("#select-category option:selected").each(function () {
-        str += $(this).text();
+        str = $(this).text();
       });
       _MainMenuController.MainMenuController.setSelectedCategory(str);
     }).trigger("change");
@@ -570,7 +575,7 @@ var MainMenuView = exports.MainMenuView = {
 
     this.$main_menu.html(this.$options);
 
-    this.$title.append("Quiz Time");
+    this.$title.append(this.title);
     $("#main-area").append(this.$title);
     $("#main-area").append(this.$main_menu);
   },

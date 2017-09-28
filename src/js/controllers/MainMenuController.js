@@ -15,8 +15,7 @@ export const MainMenuController = {
   addQuestions: function () {
     const catId = QuizModel.getSelectedCategoryId();
     const difficulty = QuizModel.getSelectedDifficulty().toLowerCase();
-    const url = "https://opentdb.com/api.php?amount=2&category="+catId+"&difficulty="+difficulty+"&type=multiple";
-    console.log(url);
+    const url = "https://opentdb.com/api.php?amount=2&category="+catId+"&difficulty="+difficulty+"&type=multiple";    
     $.ajax({
       url: url,
       success: function (result) {

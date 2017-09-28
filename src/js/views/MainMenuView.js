@@ -1,7 +1,8 @@
 import { MainMenuController } from '../controllers/MainMenuController.js'
 
-export var MainMenuView = {
+export const MainMenuView = {
   init: function () {
+    this.title = "Quiz Gem";
     this.$main_menu = $("<div>", {
       class: "main-menu"
     });
@@ -59,7 +60,7 @@ export var MainMenuView = {
 
     this.$main_menu.html(this.$options);
 
-    this.$title.append("Quiz Time");
+    this.$title.append(this.title);
     $("#main-area").append(this.$title);
     $("#main-area").append(this.$main_menu);
     
